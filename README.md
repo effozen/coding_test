@@ -9,6 +9,8 @@
 - BackJoon
   - https://www.acmicpc.net/
 
+- Order by descending of correction percent.
+
 ## How to do the study?
 1. Solve the problems.
 2. Upload it on github and post my solution on the blog
