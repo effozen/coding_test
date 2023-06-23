@@ -17,19 +17,25 @@ int binary_search(Info *book, int length, char* target){
 	int standard = 65 + index;
 
 	// 비교는 ASCII를 기준으로 하자.
-	while(strcmp(book[index].name,target)){
+	char *data = *(book[index].name);
+	int num = atoi(data[0]);
+	while(strcmp(data,target)){
 		if(index/2==0){
 			return -1;
 		}
-		if(atoi((book[index].name)[0])<standard){
+		if(num<standard){
 			max = index;
 			index = index/2;
 			standard = 65+index;
+			data = *(book[index].name);
+			num = atoi(data[0]);
 		}
 		else{
 			min = index;
 			index = index + index/2;
 			standard = 65+index;
+			data = *(book[index].name);
+			num = atoi(data[0]);
 		}
 	}
 
@@ -65,16 +71,20 @@ int main(void){
 	scanf(" %d", &volume);
 	getchar();
 	printf("Please input the name what you want to find:");
-	scanf(" %s", name);
-	
+	scanf(" %[^\n]s", name);
+
+	char *data = book[index].name;
+
 	// 탐색 시작
 	index = binary_search(book, 12, name);
+	//printf(" %s\n", name);
+	//printf(" %s\n", data);
 
 	if(index == -1){
 		printf("There is no %s\n", name);
 	}
 	else{
-		printf("%s's Number : %s\n", book[index].number, book[index].name);
+		printf("%s's Number : %s\n", book[index].name, book[index].number);
 	}
 	
 
