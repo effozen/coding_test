@@ -13,29 +13,30 @@ typedef struct {
 int binary_search(Info *book, int length, char* target){
 	int min = 0;
 	int index=length/2;
-	int max = length;
+	int max = length-1;
 	int standard = 65 + index;
 
 	// 비교는 ASCII를 기준으로 하자.
-	char *data = *(book[index].name);
-	int num = atoi(data[0]);
+	char *data = book[index].name;
+	int num = (char)data[0];
 	while(strcmp(data,target)){
-		if(index/2==0){
+		if((max-min+1)==0){
 			return -1;
 		}
 		if(num<standard){
 			max = index;
-			index = index/2;
+			index = min+((max-min+1)/2);
+			len = len/2;
 			standard = 65+index;
-			data = *(book[index].name);
-			num = atoi(data[0]);
+			data = book[index].name;
+			num = (char)data[0];
 		}
 		else{
 			min = index;
-			index = index + index/2;
+			index = min+((max-min+1)/2);
 			standard = 65+index;
-			data = *(book[index].name);
-			num = atoi(data[0]);
+			data = book[index].name;
+			num = (char)data[0];
 		}
 	}
 
@@ -67,9 +68,9 @@ int main(void){
 	};
 
 	// UI/UX 
-	printf("Please input the volume:");
-	scanf(" %d", &volume);
-	getchar();
+	//printf("Please input the volume:");
+	//scanf(" %d", &volume);
+	//getchar();
 	printf("Please input the name what you want to find:");
 	scanf(" %[^\n]s", name);
 
